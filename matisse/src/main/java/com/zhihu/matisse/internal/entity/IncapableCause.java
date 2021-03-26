@@ -18,8 +18,13 @@ package com.zhihu.matisse.internal.entity;
 import android.content.Context;
 import androidx.annotation.IntDef;
 import androidx.fragment.app.FragmentActivity;
+
+import android.graphics.Color;
+import android.view.Gravity;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zhihu.matisse.R;
 import com.zhihu.matisse.internal.ui.widget.IncapableDialog;
 
 import java.lang.annotation.Retention;
@@ -76,7 +81,18 @@ public class IncapableCause {
                 break;
             case TOAST:
             default:
-                Toast.makeText(context, cause.mMessage, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, cause.mMessage, Toast.LENGTH_SHORT).show();
+
+                Toast toast = Toast.makeText(context, cause.mMessage, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM |Gravity.CENTER, 0, 300);
+                toast.getView().setPadding(0, 0, 0, 0);
+//                toast.getView().setBackgroundColor(Color.BLACK);
+                toast.getView().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.toast_radius));
+
+                TextView text = (TextView) toast.getView().findViewById(android.R.id.message);
+                text.setTextColor(Color.WHITE);
+                text.setTextSize(14);
+                toast.show();
                 break;
         }
     }
