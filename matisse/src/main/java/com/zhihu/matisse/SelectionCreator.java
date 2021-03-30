@@ -368,4 +368,10 @@ public final class SelectionCreator {
         mSelectionSpec.showPreview = showPreview;
         return this;
     }
+
+    ///最大选择是自动退出
+    public SelectionCreator maxAutoFinish(boolean maxAutoFinish){
+        mSelectionSpec.maxAutoFinish = maxAutoFinish;
+        return this;
+    }
 }

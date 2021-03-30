@@ -58,6 +58,9 @@ public final class SelectionSpec {
     public OnCheckedListener onCheckedListener;
     public boolean showPreview;
 
+    //自定义：最大额度时自动退出
+    public boolean maxAutoFinish;
+
     private SelectionSpec() {
     }
 

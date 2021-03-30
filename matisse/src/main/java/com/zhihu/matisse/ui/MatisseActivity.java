@@ -410,6 +410,13 @@ public class MatisseActivity extends AppCompatActivity implements
             mSpec.onSelectedListener.onSelected(
                     mSelectedCollection.asListOfUri(), mSelectedCollection.asListOfString());
         }
+        //需求：最大选择自动退出完成
+        if(mSpec.maxAutoFinish){
+            if(mSelectedCollection.maxSelectableReached()){
+                finishActivityForResult();
+            }
+        }
+
     }
 
     @Override
@@ -432,6 +439,17 @@ public class MatisseActivity extends AppCompatActivity implements
         if (mMediaStoreCompat != null) {
             mMediaStoreCompat.dispatchCaptureIntent(this, REQUEST_CODE_CAPTURE);
         }
+    }
+
+    void finishActivityForResult(){
+        Intent result = new Intent();
+        ArrayList<Uri> selectedUris = (ArrayList<Uri>) mSelectedCollection.asListOfUri();
+        result.putParcelableArrayListExtra(EXTRA_RESULT_SELECTION, selectedUris);
+        ArrayList<String> selectedPaths = (ArrayList<String>) mSelectedCollection.asListOfString();
+        result.putStringArrayListExtra(EXTRA_RESULT_SELECTION_PATH, selectedPaths);
+        result.putExtra(EXTRA_RESULT_ORIGINAL_ENABLE, mOriginalEnable);
+        setResult(RESULT_OK, result);
+        finish();
     }
 
 }
